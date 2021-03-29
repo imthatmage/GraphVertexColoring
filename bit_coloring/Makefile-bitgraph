@@ -1,0 +1,14 @@
+CC=g++
+CFLAGS=-c
+LDFLAGS=
+SOURCES=bit_graph_coloring_algorithm.cpp test_bit_graph.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=bit_graph
+
+all: $(SOURCES) $(EXECUTABLE)
+	
+$(EXECUTABLE): $(OBJECTS) 
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
