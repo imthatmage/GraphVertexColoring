@@ -2,7 +2,7 @@
 
 size_t get_first_available(const std::set<size_t>& colors)
 {
-    size_t index = 0;
+    size_t index = 1;
     while (1)
     {
         if (colors.find(index) != colors.end())
