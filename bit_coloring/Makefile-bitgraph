@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c
 LDFLAGS=
-SOURCES=bit_graph_coloring_algorithm.cpp test_bit_graph.cpp
+SOURCES=bit_graph_coloring_algorithm.cpp test_bit_graph_with_file.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=bit_graph
 
