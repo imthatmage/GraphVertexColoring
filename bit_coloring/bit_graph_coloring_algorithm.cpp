@@ -1,4 +1,4 @@
-#include "bit_graph_coloring_algorithm.hpp"
+#include "bit_graph_coloring_algorithm.h"
 
 std::pair<std::vector<size_t>, size_t> fast_graph_coloring(alm::Graph Graph)
 {
