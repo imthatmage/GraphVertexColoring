@@ -1,10 +1,11 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "bit_graph_coloring_algorithm.hpp"
+#include "bit_graph_coloring_algorithm.h"
 
 int main()
 {
+    
     std::string inputfile = "gc41";
     std::string outputfile = inputfile + "result";
 

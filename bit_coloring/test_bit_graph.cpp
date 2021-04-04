@@ -1,5 +1,5 @@
 #include <iostream>
-#include "bit_graph_coloring_algorithm.hpp"
+#include "bit_graph_coloring_algorithm.h"
 
 int main()
 {
