@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-c
+CFLAGS=-c -O3
 LDFLAGS=
 SOURCES=bit_graph_coloring_algorithm.cpp test_bit_graph_with_file.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
