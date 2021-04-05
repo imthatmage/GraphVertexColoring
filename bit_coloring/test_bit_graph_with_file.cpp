@@ -6,10 +6,10 @@
 int main()
 {
     
-    std::string inputfile = "gc41";
+    std::string inputfile = "gc_1000_9";
     std::string outputfile = inputfile + "result";
 
-    std::ifstream inputData(inputfile + ".dat");
+    std::ifstream inputData(inputfile);
 
     size_t edges, vertexes;
 
@@ -43,10 +43,7 @@ int main()
     auto result = fast_graph_coloring(graph);   
     std::ofstream myfile(outputfile + ".dat");
 
-    for (size_t i = 0; i < result.first.size(); ++i)
-    {
-        myfile << i << ' ' << result.first[i] - 1 << '\n';
-    }
+    myfile << result.second;
     myfile.close();
     std::cout << "Result saved to: " << outputfile + ".dat";
 }
