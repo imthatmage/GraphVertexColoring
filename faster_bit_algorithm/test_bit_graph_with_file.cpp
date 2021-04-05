@@ -1,11 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <chrono>
 #include "bit_graph_coloring_algorithm.h"
 
 int main()
 {
-    std::string inputfile = "gc_1000_7";
+    auto start = std::chrono::high_resolution_clock::now();
+    std::string inputfile = "data/gc_1000_9";
     std::string outputfile = inputfile + "result";
 
     std::ifstream inputData(inputfile);
@@ -39,10 +41,14 @@ int main()
         graph[a].set_value(1, t1_index, t2_index);
     }
     inputData.close();
+    //auto start = std::chrono::high_resolution_clock::now();
     auto result = fast_graph_coloring(graph);   
+    auto stop = std::chrono::high_resolution_clock::now();
     std::ofstream myfile(outputfile + ".dat");
 
-    myfile << result.second;
+    myfile << result.second << std::endl;
+    myfile << std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() << " miliseconds execution time" << std::endl;
+    myfile << std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() << " microseconds execution time";
 
     myfile.close();
     std::cout << "Result saved to: " << outputfile + ".dat";
