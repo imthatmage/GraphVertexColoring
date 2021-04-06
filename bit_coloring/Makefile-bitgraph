@@ -1,0 +1,18 @@
+# Это комментарий, который говорит, что переменная CC указывает компилятор, используемый для сборки
+CC=g++
+#Это еще один комментарий. Он поясняет, что в переменной CFLAGS лежат флаги, которые передаются компилятору
+CFLAGS=-c -O3
+
+all: bit_ex
+
+bit_ex: bit_graph_coloring_algorithm.o test_bit_graph_with_file.o
+	$(CC) bit_graph_coloring_algorithm.o test_bit_graph_with_file.o -o bit_ex
+
+bit_graph_coloring_algorithm.o: bit_graph_coloring_algorithm.cpp
+	$(CC) $(CFLAGS) bit_graph_coloring_algorithm.cpp
+
+test_bit_graph_with_file.o: test_bit_graph_with_file.cpp
+	$(CC) $(CFLAGS) test_bit_graph_with_file.cpp
+
+clean:
+	rm -rf *.o hello
