@@ -7,7 +7,7 @@
 int main()
 {
     auto start = std::chrono::high_resolution_clock::now();
-    std::string inputfile = "data/gc_1000_9";
+    std::string inputfile = "data/gc_500_3";
     std::string outputfile = inputfile + "result";
 
     std::ifstream inputData(inputfile);
