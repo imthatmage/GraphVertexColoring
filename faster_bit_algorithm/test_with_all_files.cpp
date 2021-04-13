@@ -14,7 +14,7 @@ int main()
     std::cout << std::endl << "Number of bits in block: " << N << std::endl;
     for(auto& inputfilepath: fs::directory_iterator("C:/Users/nurma/Documents/repos/graph_coloring/data"))
     {
-        std::string inputfile = inputfilepath.path();
+        std::string inputfile = inputfilepath.path().string();
         std::ifstream inputData(inputfile);
 
         size_t edges, vertexes;
