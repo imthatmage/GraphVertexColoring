@@ -2,13 +2,15 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <chrono>
 
 int main()
 {
-    std::string inputfile = "gc41";
-    std::string outputfile = inputfile + "result";
+    auto start = std::chrono::high_resolution_clock::now();
+    std::string inputfile = "/home/almir/Documents/source/repos/graph_coloring/data/gc_1000_9";
+    std::string outputfile = "result";
 
-    std::ifstream inputData(inputfile + ".dat");
+    std::ifstream inputData(inputfile);
     if(!inputData.is_open())
     {
         std::cout << "Can't open this file!";
@@ -32,13 +34,11 @@ int main()
     size_t colors = 1;
 
     std::ofstream myfile(outputfile + ".dat");
-
+    auto stop = std::chrono::high_resolution_clock::now();
     for (auto& tmp : result)
     {
         colors = tmp.second > colors ? tmp.second : colors;
-        myfile << tmp.first << ' ' << tmp.second - 1 << std::endl;
     }
+    myfile << "colors: " << colors << " time: " << std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();
     myfile.close();
-    std::cout << "Number of colors: " << colors << std::endl;
-    std::cout << "Result saved to: " << outputfile + ".dat";
 }
