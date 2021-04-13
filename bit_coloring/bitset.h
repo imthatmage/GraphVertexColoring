@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <cassert>
 
-constexpr auto N = 128;
+constexpr auto N = 32;
 
 namespace alm
 {
