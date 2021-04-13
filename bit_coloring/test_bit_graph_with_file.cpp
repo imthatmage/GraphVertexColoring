@@ -7,8 +7,8 @@
 int main()
 {
     auto start = std::chrono::high_resolution_clock::now();
-    std::string inputfile = "gc_1000_9";
-    std::string outputfile = inputfile + "result";
+    std::string inputfile = "C:/Users/nurma/Documents/repos/graph_coloring/data/gc_1000_1";
+    std::string outputfile = "ressult";
 
     std::ifstream inputData(inputfile);
 
