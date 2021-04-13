@@ -47,18 +47,18 @@ int main()
             graph[a].set_value(1, t1_index, t2_index);
         }
         inputData.close();
-        size_t best_result = 500;
+        size_t best_result = 50000000000;
         std::pair<std::vector<size_t>, size_t> result;
         for(size_t p = 0; p < itera_count; ++p)
         {
             auto start = std::chrono::high_resolution_clock::now();
             result = fast_graph_coloring(graph);
             auto stop = std::chrono::high_resolution_clock::now();
-            auto curr_result = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
+            auto curr_result = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
             if(curr_result < best_result)
                 best_result = curr_result;
         }
-        outputData << inputfile.substr(55) << ' ' << result.second << "               " << best_result << "*10^-6 seconds" << std::endl; 
+        outputData << inputfile.substr(51) << ' ' << result.second << "               " << best_result << "*10^-6 seconds" << std::endl; 
     }
     outputData.close();
 }
