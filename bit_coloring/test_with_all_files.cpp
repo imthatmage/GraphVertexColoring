@@ -54,7 +54,7 @@ int main()
             auto start = std::chrono::high_resolution_clock::now();
             result = fast_graph_coloring(graph);
             auto stop = std::chrono::high_resolution_clock::now();
-            auto curr_result = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
+            auto curr_result = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
             if(curr_result < best_result)
                 best_result = curr_result;
         }
