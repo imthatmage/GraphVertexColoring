@@ -12,9 +12,9 @@ int main()
     std::ofstream outputData("result.dat");
     size_t itera_count = 10;
     std::cout << std::endl << "Number of bits in block: " << N << std::endl;
-    for(auto& inputfilepath: fs::directory_iterator("/home/almir/Documents/source/repos/graph_coloring/data"))
+    for(auto& inputfilepath: fs::directory_iterator("C:/Users/nurma/Documents/repos/graph_coloring/data"))
     {
-        std::string inputfile = inputfilepath.path();
+        std::string inputfile = inputfilepath.path().string();
         std::ifstream inputData(inputfile);
 
         size_t edges, vertexes;
