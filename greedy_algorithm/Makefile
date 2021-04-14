@@ -1,7 +1,7 @@
 CC=g++
-CFLAGS=-c -Wall
+CFLAGS=-c -Wall -O3 -std=c++20
 LDFLAGS=
-SOURCES=test_greedy_with_file.cpp greedy.cpp
+SOURCES=test_with_all_files.cpp greedy.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=greedy_algorithm
 
