@@ -48,7 +48,7 @@ int main()
         auto curr_result = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
         if (curr_result < best_result)
             best_result = curr_result;
-        outputData << inputfile.substr(51) << ' ' << Graph.get_chromatic_number() << "               " << best_result << "*10^-6 seconds" << std::endl;
+        outputData << inputfile.substr(51) << '\t' << Graph.get_chromatic_number() <<'\t' << best_result << "*10^-6 sec" << std::endl;
     }
     outputData.close();
 }
