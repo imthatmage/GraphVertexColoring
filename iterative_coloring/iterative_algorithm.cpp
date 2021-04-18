@@ -1,6 +1,5 @@
 #include "iterative_algorithm.hpp"
 #include <set>
-#include <iostream>
 
 namespace
 {
@@ -16,7 +15,7 @@ namespace
 }
 
 
-graph iterative_algorithm::algorithm(graph Graph)
+void iterative_algorithm::algorithm(graph& Graph)
 {
     Graph.sort();
     size_t color = 1;
@@ -50,17 +49,16 @@ graph iterative_algorithm::algorithm(graph Graph)
             }
         }
     }
-    Graph.chromatic_number = color;
-    return Graph;
+    Graph.set_chromatic_number(color);
 }
 
 
 //no need actually
-graph iterative_algorithm::improve(graph Graph, size_t max_time)
+void iterative_algorithm::improve(graph& Graph, size_t max_time)
 {
     for (size_t i = 0; i < max_time; ++i)
     {
-        auto vert = Graph.get_vertexes(Graph.chromatic_number - 1);
+        auto vert = Graph.get_vertexes(Graph.get_chromatic_number() - 1);
 
         std::set<size_t> curr_colors;
         size_t max_curr_color = 1;
@@ -76,7 +74,7 @@ graph iterative_algorithm::improve(graph Graph, size_t max_time)
         }
         auto color = get_first_available(curr_colors, max_curr_color);
         if (color == -1)
-            return Graph;
+            return;
         else
         {
             for (auto neigh : vert)
@@ -84,7 +82,6 @@ graph iterative_algorithm::improve(graph Graph, size_t max_time)
                 Graph.set_color(neigh, color);
             }
         }
-        --Graph.chromatic_number;
+        Graph.set_chromatic_number(Graph.get_chromatic_number() - 1);
     }
-    return Graph;
 }

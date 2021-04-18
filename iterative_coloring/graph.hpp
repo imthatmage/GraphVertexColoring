@@ -25,11 +25,11 @@ public:
         return working.end();
     }
 
-    void assign(const std::vector<vertex>& hgraph)
+    void assign(std::vector<vertex>& hgraph)
     {
         for (auto& vert : hgraph)
             working.push_back(vert);
-        adjacent = hgraph;
+        adjacent = std::move(hgraph);
     }
 
     auto erase(std::list<vertex>::iterator& itera)
@@ -67,8 +67,19 @@ public:
     {
         return adjacent[i];
     }
-    size_t chromatic_number;
+
+    void set_chromatic_number(size_t num)
+    {
+        chromatic_number = num;
+    }
+
+    size_t get_chromatic_number()
+    {
+        return chromatic_number;
+    }
+    
 private:
+    size_t chromatic_number = -1;
     size_t size_ = 0;
     //working vertex storage
     std::list<vertex> working;

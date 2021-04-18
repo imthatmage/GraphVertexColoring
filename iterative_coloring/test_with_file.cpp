@@ -6,7 +6,7 @@
 int main()
 {
     auto start = std::chrono::high_resolution_clock::now();
-    std::string inputfile = "C:/Users/nurma/Documents/repos/graph_coloring/data/gc_1000_9";
+    std::string inputfile = "C:/Users/nurma/Documents/repos/graph_coloring/data/gc_1000_7";
     std::string outputfile = "tmp_result.dat";
 
     std::ifstream inputData(inputfile);
@@ -39,18 +39,18 @@ int main()
     inputData.close();
     std::ofstream outputData(outputfile);
 
-    Graph = iterative_algorithm::algorithm(Graph);
+    iterative_algorithm::algorithm(Graph);
     auto stop = std::chrono::high_resolution_clock::now();
-    auto curr_result = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();  
+    auto curr_result = std::chrono::duration_cast<std::chrono::seconds>(stop - start).count();  
     std::cout << std::endl;
 
     //std::for_each(colors.begin(), colors.end(), [](auto elem) { static size_t i = 0; std::cout << i++ << ' ' << elem << std::endl; });
 
     //checking correctness
-    std::cout << "Colors: " << Graph.chromatic_number << std::endl;
-    Graph = iterative_algorithm::improve(Graph, 50);
+    std::cout << "Colors: " << Graph.get_chromatic_number() << std::endl;
+    iterative_algorithm::improve(Graph, 50);
     auto colors = Graph.get_colors();
-    //std::for_each(colors.begin(), colors.end(), [](auto elem) { static size_t i = 0; std::cout << i++ << ' ' << elem << std::endl; });
+    std::for_each(colors.begin(), colors.end(), [](auto elem) { static size_t i = 0; std::cout << i++ << ' ' << elem << std::endl; });
     for (size_t i = 0; i < vertexes; ++i)
     {
         for (auto neigh : Graph.get_vertex(i))
@@ -58,6 +58,6 @@ int main()
                 std::cout << "Atas";
     }
 
-    std::cout << "Colors: " << Graph.chromatic_number << std::endl;
-    std::cout << "Time: " << curr_result << " 10*-3 seconds" << std::endl;
+    std::cout << "Colors: " << Graph.get_chromatic_number() << std::endl;
+    std::cout << "Time: " << curr_result << " seconds" << std::endl;
 }
