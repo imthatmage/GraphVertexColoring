@@ -5,8 +5,9 @@
 
 int main()
 {
-    auto start = std::chrono::high_resolution_clock::now();
-    std::string inputfile = "C:/Users/nurma/Documents/repos/graph_coloring/data/gc_1000_7";
+    size_t itera_count = 5;
+    size_t part_count = 20;
+    std::string inputfile = "C:/Users/nurma/Documents/repos/graph_coloring/data/gc_50_7";
     std::string outputfile = "tmp_result.dat";
 
     std::ifstream inputData(inputfile);
@@ -35,29 +36,44 @@ int main()
         assign_graph[a].push_back(b);
         assign_graph[b].push_back(a);
     }
-    Graph.assign(assign_graph);
+    auto helper = Graph;
     inputData.close();
     std::ofstream outputData(outputfile);
+    size_t best_result = 5000000000000;
+    size_t best_color = 50000000000000;
+    graph best_graph = helper;
+    for(size_t k = 0; k < itera_count; ++k)
+        for (size_t i = 0; i < part_count; ++i)
+        {
+            auto start = std::chrono::high_resolution_clock::now();
+            Graph = helper;
+            Graph.assign(assign_graph, i);
+            iterative_algorithm::algorithm(Graph);
+            auto stop = std::chrono::high_resolution_clock::now();
+            auto curr_result = std::chrono::duration_cast<std::chrono::seconds>(stop - start).count();
+            if (curr_result < best_result)
+                best_result = curr_result;
+            std::cout << std::endl;
 
-    iterative_algorithm::algorithm(Graph);
-    auto stop = std::chrono::high_resolution_clock::now();
-    auto curr_result = std::chrono::duration_cast<std::chrono::seconds>(stop - start).count();  
-    std::cout << std::endl;
+            //checking correctness
+            std::cout << "Colors: " << Graph.get_chromatic_number() << std::endl;
+            if (Graph.get_chromatic_number() < best_color)
+            {
+                best_color = Graph.get_chromatic_number();
+                best_graph = Graph;
+            }
+            iterative_algorithm::improve(Graph, 50);
+            auto colors = Graph.get_colors();
+            //std::for_each(colors.begin(), colors.end(), [](auto elem) { static size_t i = 0; std::cout << (i++)%1000 << ' ' << elem << std::endl; });
+            for (size_t i = 0; i < vertexes; ++i)
+            {
+                for (auto neigh : Graph.get_vertex(i))
+                    if (colors[neigh] == colors[i])
+                        std::cout << "Atas";
+            }
+            std::cout << std::endl;
+        }
 
-    //std::for_each(colors.begin(), colors.end(), [](auto elem) { static size_t i = 0; std::cout << i++ << ' ' << elem << std::endl; });
-
-    //checking correctness
-    std::cout << "Colors: " << Graph.get_chromatic_number() << std::endl;
-    iterative_algorithm::improve(Graph, 50);
-    auto colors = Graph.get_colors();
-    std::for_each(colors.begin(), colors.end(), [](auto elem) { static size_t i = 0; std::cout << i++ << ' ' << elem << std::endl; });
-    for (size_t i = 0; i < vertexes; ++i)
-    {
-        for (auto neigh : Graph.get_vertex(i))
-            if (colors[neigh] == colors[i])
-                std::cout << "Atas";
-    }
-
-    std::cout << "Colors: " << Graph.get_chromatic_number() << std::endl;
-    std::cout << "Time: " << curr_result << " seconds" << std::endl;
+    std::cout << "Colors: " << best_color << std::endl;
+    std::cout << "Time: " << best_result << " seconds" << std::endl;
 }

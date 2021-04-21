@@ -3,16 +3,30 @@
 #include <list>
 #include <algorithm>
 #include <vector>
+#include <random>
+#include <map>
 
 class graph final
 {
 public:
     graph(size_t size) : size_(size), colors(size) {}
 
-    void sort()
+    void some_noise(std::vector<vertex>& vec, size_t part)
     {
-        working.sort();
+        std::random_device r;
+        std::default_random_engine e1(r());
+        for (size_t i = 1; i < size_/part; ++i)
+        {
+            std::uniform_int_distribution<int> uniform_dist(0, size_ - 1);
+            int index0 = uniform_dist(e1);
+            int index1 = uniform_dist(e1);
+            auto tmp = vec[index0];
+            vec[index0] = vec[index1];
+            vec[index1] = tmp;
+        }
+
     }
+
     size_t size() { return size_; }
 
     std::list<vertex>::iterator begin()
@@ -25,11 +39,14 @@ public:
         return working.end();
     }
 
-    void assign(std::vector<vertex>& hgraph)
+    void assign(std::vector<vertex> hgraph, size_t part)
     {
+        adjacent = hgraph;
+        std::sort(hgraph.begin(), hgraph.end());
+        if(part != 0)
+            some_noise(hgraph, part);
         for (auto& vert : hgraph)
             working.push_back(vert);
-        adjacent = std::move(hgraph);
     }
 
     auto erase(std::list<vertex>::iterator& itera)
@@ -63,7 +80,7 @@ public:
     {
         return color_vertexes[i];
     }
-    vertex& get_vertex(size_t i )
+    vertex& get_vertex(size_t i)
     {
         return adjacent[i];
     }
@@ -79,7 +96,7 @@ public:
     }
     
 private:
-    size_t chromatic_number = -1;
+    size_t chromatic_number;
     size_t size_ = 0;
     //working vertex storage
     std::list<vertex> working;

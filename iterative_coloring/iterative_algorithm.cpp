@@ -1,5 +1,6 @@
 #include "iterative_algorithm.hpp"
 #include <set>
+#include <iostream>
 
 namespace
 {
@@ -17,7 +18,6 @@ namespace
 
 void iterative_algorithm::algorithm(graph& Graph)
 {
-    Graph.sort();
     size_t color = 1;
     std::set<size_t> curr_colored;
     auto itera = Graph.begin();

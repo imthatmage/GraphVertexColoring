@@ -7,11 +7,27 @@ class vertex final
 public:
     vertex(size_t id) : id_(id) { }
 
+    vertex(const vertex& another)
+    {
+        adjacent = another.adjacent;
+        id_ = another.id_;
+        size_ = another.size_;
+    }
+
+    vertex& operator=(const vertex& another)
+    {
+        adjacent = another.adjacent;
+        id_ = another.id_;
+        size_ = another.size_;
+        return *this;
+    }
+
     void push_back(size_t adj)
     {
         adjacent.insert(adj);
     }
 
+    //we want to vector to sort by increasing to assign list by decreasing
     bool operator<(const vertex& another)
     {
         return (*this).size() > another.size();
